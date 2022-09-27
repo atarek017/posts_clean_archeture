@@ -9,7 +9,7 @@ import '../../../../core/network/network_info.dart';
 import '../data_sources/post_local_data_source.dart';
 import '../data_sources/post_remote_data_source.dart';
 
-typedef Future<Unit> DeleteOrUpdateOrUpdatePost();
+typedef DeleteOrUpdateOrUpdatePost = Future<Unit> Function();
 
 class PostRepositoryImpl implements PostRepository {
   final PostRemoteDateSource remoteDateSource;
@@ -27,7 +27,7 @@ class PostRepositoryImpl implements PostRepository {
       try {
         final remotePosts = await remoteDateSource.getAllPosts();
 
-        localDateSource.cachePost(remotePosts);
+        localDateSource.cachePosts(remotePosts);
         return Right(remotePosts);
       } on ServerException {
         return left(ServerFailure());
