@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
+import 'package:posts_clean_architecher_app/core/constants.dart';
 import 'package:posts_clean_architecher_app/features/posts/data/models/post_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,13 +23,13 @@ class PostLocalDateSourceImpl implements PostLocalDateSource {
     List postModelsToJson = posts
         .map<Map<String, dynamic>>((postModel) => postModel.toJson())
         .toList();
-    sharedPreferences.setString("CACHED_POSTS", json.encode(postModelsToJson));
+    sharedPreferences.setString(Constants.CACHED_POSTS, json.encode(postModelsToJson));
     return Future.value(unit);
   }
 
   @override
   Future<List<PostModel>> getCachedPosts() {
-    final jsonData = sharedPreferences.getString("CACHED_POSTS");
+    final jsonData = sharedPreferences.getString(Constants.CACHED_POSTS);
 
     if (jsonData != null) {
       List decodeData = json.decode(jsonData);
