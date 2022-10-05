@@ -16,7 +16,7 @@ abstract class PostLocalDateSource {
 class PostLocalDateSourceImpl implements PostLocalDateSource {
   final SharedPreferences sharedPreferences;
 
-  PostLocalDateSourceImpl(this.sharedPreferences);
+  PostLocalDateSourceImpl({required this.sharedPreferences});
 
   @override
   Future<Unit> cachePosts(List<PostModel> posts) {
