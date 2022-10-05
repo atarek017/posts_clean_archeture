@@ -5,6 +5,7 @@ import 'package:posts_clean_architecher_app/features/posts/presentation/bloc/pos
 
 import 'core/app_theme.dart';
 import 'core/injection_container.dart' as di;
+import 'features/posts/presentation/pages/posts_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider(create: (_)=>di.instance<PostsBloc>()),
+          BlocProvider(create: (_)=>di.instance<PostsBloc>()..add(GetAllPostsEvent())),
           BlocProvider(create: (_)=>di.instance<MangePostsBloc>()),
         ],
         child: MaterialApp(
@@ -36,13 +37,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Posts"),
-      ),
-      body: const Center(
-        child: Text("Hello World"),
-      ),
-    );
+    return PostsPage();
   }
 }
