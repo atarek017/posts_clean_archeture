@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/post.dart';
+import '../pages/post_mange.dart';
 
 class PostsListWidget extends StatelessWidget {
   final List<Post> posts;
@@ -25,7 +26,17 @@ class PostsListWidget extends StatelessWidget {
             style: const TextStyle(fontSize: 16),
           ),
           contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) =>  PostMangeScreen(
+                  isUpdate: true,
+                  post:  posts[index] ,
+                ),
+              ),
+            );
+          },
         );
       },
       separatorBuilder: (context, index) {
